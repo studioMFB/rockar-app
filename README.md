@@ -28,15 +28,21 @@ npm i npm install -g ts-node
 
 To run the application, follow these steps:
 
-Start the development server
+Start the app for development.
 ```bash
 npm run dev
 ```
-Open http://localhost:4000 with your browser to see the frontend application.
-The GraphQL server can be accessed at http://localhost:4000/api/graphql. 
+Start the app for production.
+```bash
+npm run build
+npm run start
+```
+
+Open http://localhost:3000 with your browser to see the frontend application.
+The GraphQL server can be accessed at http://localhost:4000/graphql. 
 You can use tools like GraphQL Playground or Postman to interact with the GraphQL server.
 
 ## Project Structure
 * pages/api/graphql.ts: This file contains the Apollo Server and handles GraphQL queries.
-* lib/apollo-client.ts: This file sets up the configuration for Apollo Client.
+* lib/apolloClient.ts: This file sets up the configuration for Apollo Client.
 * pages/index.ts: This is the main page component that uses Apollo Client to fetch data from the GraphQL server.

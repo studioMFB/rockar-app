@@ -1,0 +1,64 @@
+{
+  "name": "apollo-test",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "build:server": "tsc",
+    "build:client": "react-scripts build",
+    "build": "concurrently --names \"server,client\" \"npm run build:server\" \"npm run build:client\"",
+    "start:server": "node ./src/server/index.js",
+    "start:client": "react-scripts start -p3000",
+    "start": "concurrently --names \"server,client\" \"npm run start:server\" \"npm run start:client\"",
+    "dev:server": "nodemon --exec ts-node ./src/server/index.js",
+    "dev": "concurrently --names \"server,client\" \"npm run dev:server\" \"npm run start:client\"",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.6",
+    "apollo-server": "^3.12.1",
+    "graphql": "^16.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.59",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
