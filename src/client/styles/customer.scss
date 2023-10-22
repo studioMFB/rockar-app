@@ -1,0 +1,18 @@
+.customers{
+  width: 100%;
+  height: auto;
+  background-color: rgb(26, 20, 32);
+}
+
+.customer {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: solid 1px rgba(65, 65, 65, 0.418);
+
+  p{
+    font-weight: 200;
+    font-size: 15px;
+    color: rgb(51, 51, 51);
+  }
+}

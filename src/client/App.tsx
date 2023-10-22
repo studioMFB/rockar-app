@@ -1,14 +1,15 @@
 import React from 'react';
+import "./styles/app.scss";
 import { ApolloProvider } from '@apollo/client';
 import { client } from './apolloClient';
-import Hello from './components/hello';
+import Customers from './components/customers';
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <div>
+      <div className="app">
         <h2>App to test Apollo</h2>
-        <Hello />
+        <Customers />
       </div>
     </ApolloProvider>
   );
