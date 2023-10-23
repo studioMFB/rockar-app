@@ -1,17 +1,26 @@
-import { gql } from '@apollo/client';
+import { gql } from "apollo-server-express";
 
 
 export const TYPE = "customer";
 
+// export const CUSTOMERS_QUERY = gql`
+//   query getCustomers($type: String!){
+//     dataset(type: $type) {
+//       __typename
+//       ... on Customer {
+//         forename
+//         surname
+//       }
+//     }
+//   }
+// `;
+
 export const CUSTOMERS_QUERY = gql`
   query getCustomers($type: String!){
-    dataset(type: $type) {
-      __typename
-      ... on Customer {
+    customers {
         forename
         surname
       }
-    }
   }
 `;
 

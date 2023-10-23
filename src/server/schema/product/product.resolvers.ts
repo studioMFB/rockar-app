@@ -15,40 +15,42 @@ import { TYPE } from "./product.queries";
 // }
 
 export const ProductResolvers = {
-  // customers: async (parent: any, args: { filter: IProduct }, context: any, info: any): Promise<IProduct[]> => {
-  customers: async (parent: any, args: { filter: IProduct }, context: any, info: any): Promise<String[][]> => {
-      try {
-      const dataArray = await DataLoader.genericDataGetter(TYPE);
+  products: DataLoader.fetchAll<IProduct>('product'),
 
-      // Extracting filter input from arguments
-      const { filter } = args;
-      if (!filter) {
-        throw new Error(ERROR_MSG_FILTER);
-      }
+  //   productsFilter: async (parent: any, args: { filter: IProduct }, context: any, info: any): Promise<String[][]> => {
+  //     try {
+  //     const dataArray = await DataLoader.fetchData(TYPE);
 
-      // Filter the results
-      const filteredCustomers = dataArray.filter((customer) => {
-        let matches = true;
+  //     // Extracting filter input from arguments
+  //     const { filter } = args;
+  //     if (!filter) {
+  //       throw new Error(ERROR_MSG_FILTER);
+  //     }
 
-        for (const [key, value] of Object.entries(filter)) {
-          if (key in customer && customer[key as keyof typeof customer] !== value) {
-            matches = false;
-            break;
-          }
-        }
-        return matches;
-      });
+  //     // Filter the results
+  //     // const filteredProducts = dataArray.filter((product) => {
+  //     //   let matches = true;
 
-      // // Transform the data from snake_case to camelCase
-      // const mapArray = filteredCustomers.map((customer: any): IProduct => {
-      //   return mapToProduct(customer);
-      // });
+  //     //   for (const [key, value] of Object.entries(filter)) {
+  //     //     if (key in product && product[key as keyof typeof product] !== value) {
+  //     //       matches = false;
+  //     //       break;
+  //     //     }
+  //     //   }
+  //     //   return matches;
+  //     // });
 
-      // return mapArray;
-      return filteredCustomers;
-    }
-    catch (error) {
-      throw new Error(ERROR_MSG_DATA_FETCH);
-    }
-  },
+  //     // // Transform the data from snake_case to camelCase
+  //     // const mapArray = filteredCustomers.map((customer: any): IProduct => {
+  //     //   return mapToProduct(customer);
+  //     // });
+
+  //     return dataArray;
+  //     // return mapArray;
+  //     // return filteredProducts;
+  //   }
+  //   catch (error) {
+  //     throw new Error(ERROR_MSG_DATA_FETCH);
+  //   }
+  // },
 };

@@ -3,7 +3,10 @@ import { DatasetType, DatasetResolver } from './dataset/dataset.index';
 import { CustomerType, CustomerResolver } from './customer/customer.index';
 import { ProductType, ProductResolver } from './product/product.index';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { EmailAddressResolver, PhoneNumberResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
+import { EmailAddressResolver, PhoneNumberResolver, PostalCodeResolver, typeDefs as scalarTypeDefs } from 'graphql-scalars';
+import { DataLoader } from '../utils/dataLoader';
+import { ERROR_MSG_DATA_FETCH, ERROR_MSG_FILTER, ERROR_MSG_RESOLVER } from '../../constants/error';
+import { ICustomer } from './customer/customer.model';
 
 
 const typeDefs = gql`
@@ -14,8 +17,12 @@ const typeDefs = gql`
 `;
 
 const resolvers = {
+    // Using the higher-order function to create resolvers
+    // customers: fetchAll<ICustomer>('Customer'),
+    // products: createResolver<IProduct>('Product'),
+
     DatasetResult: {
-        __resolveType(obj:any, contextValue:any, info:any) {
+        __resolveType(obj: any, contextValue: any, info: any) {
             // Only Customer has a surname field
             if (obj.surname) {
                 return 'Customer';
@@ -41,6 +48,6 @@ const resolvers = {
 const schema = makeExecutableSchema({
     typeDefs: [scalarTypeDefs, typeDefs], // Combine scalar type definitions with our own
     resolvers,
-  });
+});
 
-  export default schema;
+export default schema;

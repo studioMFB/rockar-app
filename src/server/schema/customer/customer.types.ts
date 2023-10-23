@@ -21,7 +21,8 @@ const CustomerTypes = gql`
   }
 
   type Query {
-    customers(filter: CustomerFilterInput!): [Customer] 
+    customers:[Customer]
+    customersFilter(filter: CustomerFilterInput!): [Customer] 
    }
 `;
 

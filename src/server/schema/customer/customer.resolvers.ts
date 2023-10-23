@@ -34,7 +34,12 @@ function mapToCustomer(data: any): ICustomer {
   };
 }
 
+
+
 const CustomerResolvers = {
+  customers: DataLoader.fetchAll<ICustomer>('customer'),
+
+
   /**
  * Retrieves a list of customers optionally filtered by certain criteria.
  * 
@@ -62,39 +67,40 @@ const CustomerResolvers = {
  * 
  * @function customers
  */
-  customers: async (parent: any, args: { filter: ICustomer }, context: any, info: any): Promise<ICustomer[]> => {
-          try {
-      const dataArray = await DataLoader.genericDataGetter(TYPE);
+  customersFilter: async (parent: any, args: { filter: ICustomer }, context: any, info: any): Promise<ICustomer[]> => {
+  //         try {
+      const dataArray = await DataLoader.fetchData<ICustomer>(TYPE);
 
-      // Extracting filter input from arguments
-      const { filter } = args;
-      if(!filter){
-        throw new Error(ERROR_MSG_FILTER);
-      }
+  //     // Extracting filter input from arguments
+  //     const { filter } = args;
+  //     if(!filter){
+  //       throw new Error(ERROR_MSG_FILTER);
+  //     }
 
-      // Filter the results
-      const filteredCustomers = dataArray.filter((customer) => {
-        let matches = true;
+  //     // Filter the results
+  //     const filteredCustomers = dataArray.filter((customer) => {
+  //       let matches = true;
 
-        for (const [key, value] of Object.entries(filter)) {
-          if (key in customer && customer[key as keyof typeof customer] !== value) {
-            matches = false;
-            break;
-          }
-        }
-        return matches;
-      });
+  //       for (const [key, value] of Object.entries(filter)) {
+  //         if (key in customer && customer[key as keyof typeof customer] !== value) {
+  //           matches = false;
+  //           break;
+  //         }
+  //       }
+  //       return matches;
+  //     });
 
-      // Transform the data from snake_case to camelCase
-      const mapArray = filteredCustomers.map((customer: any): ICustomer => {
-        return mapToCustomer(customer);
-      });
+  //     // Transform the data from snake_case to camelCase
+  //     const mapArray = filteredCustomers.map((customer: any): ICustomer => {
+  //       return mapToCustomer(customer);
+  //     });
 
-      return mapArray;
-    }
-    catch (error) {
-      throw new Error(ERROR_MSG_DATA_FETCH);
-    }
+  // return mapArray;
+  return dataArray;
+  //   }
+  //   catch (error) {
+  //     throw new Error(ERROR_MSG_DATA_FETCH);
+  //   }
   },
 };
 
