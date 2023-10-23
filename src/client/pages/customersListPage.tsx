@@ -3,12 +3,12 @@ import "./../styles/customer.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
 import { ICustomer } from "../../server/schema/customer/customer.model";
 import { useQuery } from '@apollo/client';
-import { CUSTOMERS_QUERY } from "../../server/schema/customer/customer.queries";
+import { CUSTOMERS_NAME_QUERY } from "../../server/schema/customer/customer.queries";
 import { Link } from "react-router-dom";
 
 
 function CustomersListPage() {
-    const { loading, error, data } = useQuery(CUSTOMERS_QUERY);
+    const { loading, error, data } = useQuery(CUSTOMERS_NAME_QUERY);
 
   if (loading) { return <p>Loading...</p>; }
   if (error) { return <p>{ERROR_MSG_WRONG}</p>; }

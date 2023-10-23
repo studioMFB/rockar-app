@@ -3,8 +3,8 @@ import "./../styles/customer.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
 import { ICustomer } from "../../server/schema/customer/customer.model";
 import { useQuery } from '@apollo/client';
-import { CUSTOMER_QUERY } from "../../server/schema/customer/customer.queries";
 import { useParams } from 'react-router-dom';
+import { CUSTOMERS_QUERY } from "../../server/schema/customer/customer.queries";
 
 
 // Define the expected params
@@ -17,7 +17,7 @@ interface CustomerPageParams {
 function CustomerPage() {
   const { forename, surname } = useParams<CustomerPageParams>();
   
-      const { loading, error, data } = useQuery(CUSTOMER_QUERY, {
+      const { loading, error, data } = useQuery(CUSTOMERS_QUERY, {
     variables: { filter: {
       forename: forename,
       surname: surname,

@@ -1,7 +1,9 @@
 import csv from "csvtojson";
-import { ERROR_MSG_CONVERT, ERROR_MSG_DATA_FETCH, ERROR_MSG_DATA_SOURCE, 
-  ERROR_MSG_DB_CONNECT, ERROR_MSG_DIR_UNDEFINED, 
-  ERROR_MSG_FILE_UNDEFINED, ERROR_MSG_PARAMS } from "../../constants/error";
+import {
+  ERROR_MSG_CONVERT, ERROR_MSG_DATA_FETCH, ERROR_MSG_DATA_SOURCE,
+  ERROR_MSG_DB_CONNECT, ERROR_MSG_DIR_UNDEFINED,
+  ERROR_MSG_FILE_UNDEFINED, ERROR_MSG_PARAMS
+} from "../../constants/error";
 
 
 export namespace DataLoader {
@@ -18,23 +20,66 @@ export namespace DataLoader {
 
   //   return data;
   // }
+  function mapData(data: any[]): any[] {
+    return data.map(item => {
+      const result: { [key: string]: any } = {};
 
-  export function fetchAll<T>(type: string) {
-    return async (obj: any, args: { filter: T }, context: any, info: any):Promise<T[]> => {
+      for (const key in item) {
+        // Only transform the data that we know to be snake_case to camelCase.
+        const newKey = key === 'contact_number' ? 'contactNumber' : key;
 
-        const params = {
-            ...args, // arguments passed to the database query.
-        };
+        result[newKey] = item[key];
+      }
 
-        try {
-            const dataArray: T[] = await DataLoader.fetchData<T>(type.toLowerCase(), params);
-            return dataArray;
+      return result;
+    });
+  }
+
+  async function filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
+    try {
+      // Filter the data
+      const filteredData = dataArray.filter((data: T) => {
+        let matches = true;
+
+        for (const [key, value] of Object.entries(filter)) {
+          if (key in data && data[key as keyof typeof data] !== value) {
+            matches = false;
+            break;
+          }
         }
-        catch (error) {
-            throw new Error(ERROR_MSG_DATA_FETCH);
+        return matches;
+      });
+
+      return mapData(filteredData);
+    }
+    catch (error) {
+      throw new Error(ERROR_MSG_DATA_FETCH);
+    }
+  }
+
+  export function fetchAll<T extends object>(type: string) {
+    return async (obj: any, args: { filter: T }, context: any, info: any): Promise<T[]> => {
+
+      const params = {
+        ...args, // arguments passed to the database query.
+      };
+      // Extracting filter input from arguments
+      const { filter } = args;
+
+      try {
+        const dataArray = await fetchData<T>(type.toLowerCase(), params);
+        if (filter) {
+          return await filterData<T>(filter, dataArray);
         }
+        else {
+          return dataArray;
+        }
+      }
+      catch (error) {
+        throw new Error(ERROR_MSG_DATA_FETCH);
+      }
     };
-}
+  }
 
   export async function fetchData<T>(type: string, params?: Record<string, any>): Promise<T[]> {
     const DATA_SOURCE: string | undefined = process.env.DATA_SOURCE?.toLowerCase();

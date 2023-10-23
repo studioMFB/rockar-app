@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 import { EmailAddress, PostalCode } from 'graphql-scalars/typings/typeDefs';
 
 
-const CustomerTypes = gql`
+export const CustomerTypes = gql`
 
   type Customer{
     email: EmailAddress
@@ -21,9 +21,6 @@ const CustomerTypes = gql`
   }
 
   type Query {
-    customers: [Customer] 
-    customersFilter(filter: CustomerFilterInput!): [Customer] 
+    customers(filter: CustomerFilterInput): [Customer] 
    }
 `;
-
-export{CustomerTypes as CustomerType};

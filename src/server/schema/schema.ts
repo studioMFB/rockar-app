@@ -1,7 +1,7 @@
 import { gql } from 'apollo-server-express';
 import { DatasetType, DatasetResolver } from './dataset/dataset.index';
-import { CustomerType, CustomerResolver } from './customer/customer.index';
-import { ProductType, ProductResolver } from './product/product.index';
+import { CustomerTypes, CustomerResolvers } from './customer/customer.index';
+import { ProductTypes, ProductResolvers } from './product/product.index';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { EmailAddressResolver, PhoneNumberResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
 
@@ -9,8 +9,8 @@ import { EmailAddressResolver, PhoneNumberResolver, PostalCodeResolver, typeDefs
 const typeDefs = gql`
      type Query
      ${DatasetType}
-     ${CustomerType}
-     ${ProductType}
+     ${CustomerTypes}
+     ${ProductTypes}
 `;
 
 const resolvers = {
@@ -29,8 +29,8 @@ const resolvers = {
     },
     Query: {
         ...DatasetResolver,
-        ...CustomerResolver,
-        ...ProductResolver,
+        ...CustomerResolvers,
+        ...ProductResolvers,
     },
     // Add the custom scalar resolvers here
     EmailAddress: EmailAddressResolver,

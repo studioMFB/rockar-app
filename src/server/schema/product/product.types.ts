@@ -19,8 +19,7 @@ export const ProductTypes = gql`
   }
 
   type Query {
-    products: [Product] 
-    productsFilter(filter: ProductFilterInput!): [Product] 
+    products(filter: ProductFilterInput): [Product] 
    }
 `;
 

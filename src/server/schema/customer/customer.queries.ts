@@ -15,16 +15,16 @@ import { gql } from '@apollo/client';
 //   }
 // `;
 
-export const CUSTOMERS_QUERY = gql`
-  query getCustomers{
-    customers {
+export const CUSTOMERS_NAME_QUERY = gql`
+  query getCustomers($filter: CustomerFilterInput){
+    customers(filter: $filter) {
         forename
         surname
       }
   }
 `;
 
-export const CUSTOMER_QUERY = gql`
+export const CUSTOMERS_QUERY = gql`
   query getFilteredCustomers($filter: CustomerFilterInput!) {
     customers(filter: $filter) {
       forename

@@ -19,8 +19,8 @@ import { gql } from '@apollo/client';
 // `;
 
 export const PRODUCTS_QUERY = gql`
-  query getProducts{
-    products {
+  query getProducts($filter: ProductFilterInput) {
+    products(filter: $filter) {
       vin
       make
       colour
@@ -30,14 +30,14 @@ export const PRODUCTS_QUERY = gql`
   }
 `;
 
-export const PRODUCTS_FILTER_QUERY = gql`
-  query getFilteredProducts($filter: CustomerFilterInput!) {
-    products(filter: $filter) {
-        vin
-        make
-        colour
-        model
-        price
-    }
-  }
-`;
+// export const PRODUCTS_FILTER_QUERY = gql`
+//   query getFilteredProducts($filter: ProductFilterInput!) {
+//     products(filter: $filter) {
+//         vin
+//         make
+//         colour
+//         model
+//         price
+//     }
+//   }
+// `;
