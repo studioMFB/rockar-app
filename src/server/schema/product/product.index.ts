@@ -1,2 +1,2 @@
-export {ProductType} from "./product.type";
-export {ProductResolver} from "./product.resolver";
+export {ProductTypes as ProductType} from "./product.types";
+export {ProductResolvers as ProductResolver} from "./product.resolvers";

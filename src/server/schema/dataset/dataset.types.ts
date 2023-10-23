@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 
-export const DatasetType = gql`
+export const DatasetTypes = gql`
 
 union DatasetResult = Customer | Product
 

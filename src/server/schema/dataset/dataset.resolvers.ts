@@ -1,9 +1,9 @@
 import { ERROR_MSG_DATA_FETCH } from "../../../constants/error";
 import { IDataset } from "./dataset.model";
-import { DataLoader } from "./../../utils/dataLoader";
+import { DataLoader } from "../../utils/dataLoader";
 
 
-export const DatasetResolver = {
+export const DatasetResolvers = {
 
     dataset: async (root: any, args: IDataset): Promise<string[][]> => {
         try {

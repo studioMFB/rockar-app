@@ -1,17 +1,18 @@
+import 'dotenv/config';// Needed to access ENV variables.
 import http from "http";
 import express from "express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from 'apollo-server-express';
-import {typeDefs, resolvers} from "./schema/schema"
-import 'dotenv/config';// Needed to access ENV variables.
+import schema from "./schema/schema";
 
 
-async function startApolloServer(typeDefs:any, resolvers:any | any[]) {
+async function startApolloServer(schema:any) {
     const app = express();
+
     const httpServer = http.createServer(app);
+
     const server = new ApolloServer({
-        typeDefs: typeDefs,
-        resolvers: resolvers,
+        schema: schema,
         // Tell Express to attach GraphQL functionality to the server.
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     }) as any;
@@ -30,4 +31,4 @@ async function startApolloServer(typeDefs:any, resolvers:any | any[]) {
 }
 
 // Run the server.
-startApolloServer(typeDefs, resolvers);
+startApolloServer(schema);

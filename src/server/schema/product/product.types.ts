@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 
-export const ProductType = gql`
+export const ProductTypes = gql`
 
   type Product {
     vin: String!

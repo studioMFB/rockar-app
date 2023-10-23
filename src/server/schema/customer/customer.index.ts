@@ -1,4 +1,4 @@
-export { CustomerType } from './customer.type';
-export { CustomerResolver } from './customer.resolver';
+export { CustomerType } from './customer.types';
+export { CustomerResolver } from './customer.resolvers';
 
 export{};

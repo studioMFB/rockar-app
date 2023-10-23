@@ -1,2 +1,2 @@
-export {DatasetType} from "./dataset.type";
-export {DatasetResolver} from "./dataset.resolver";
+export {DatasetTypes as DatasetType} from "./dataset.types";
+export {DatasetResolvers as DatasetResolver} from "./dataset.resolvers";

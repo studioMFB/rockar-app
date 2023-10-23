@@ -1,26 +1,10 @@
 import "./../styles/main.scss";
-import "./../styles/customer.scss";
+import "./../styles/product.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
 import { IProduct } from "../../server/schema/product/product.model";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+import { PRODUCTS_QUERY, TYPE } from "../../server/schema/product/product.queries";
 
-
-const TYPE = "product";
-
-const PRODUCTS_QUERY = gql`
-  query getDataset($type: String!){
-    dataset(type: $type) {
-      __typename
-      ... on Product {
-        vin
-        make
-        colour
-        model
-        price
-      }
-    }
-  }
-`;
 
 function ProductsPage() {
   const { loading, error, data } = useQuery(PRODUCTS_QUERY, {
@@ -32,7 +16,7 @@ function ProductsPage() {
 
   return (<div className="container">
     {data.dataset.map((product: IProduct, index: number) => {
-      return <div className="item products">
+      return <div className="item product">
         <p key={index}>{product.make}</p>
         <p key={index}>{product.model}</p>
         <p key={index}>{product.colour}</p>
