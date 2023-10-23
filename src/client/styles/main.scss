@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2rem 0;
+    background-color: var(--main-bkg-color);
+}
+
+.item {
+    color: var(--item-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+
+    a {
+        color: var(--link-color);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

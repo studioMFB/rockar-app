@@ -1,5 +1,5 @@
 // import csv from "csvtojson";
-import { DataLoader } from "../../utils/util.dataLoader";
+import { DataLoader } from "../../utils/dataLoader";
 import { ICustomer } from "./customer.model";
 
 const TYPE = "customer";

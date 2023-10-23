@@ -2,23 +2,9 @@ import http from "http";
 import express from "express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from 'apollo-server-express';
-import {typeDefs, resolvers} from "./schema/schema.index"
+import {typeDefs, resolvers} from "./schema/schema"
 import 'dotenv/config';// Needed to access ENV variables.
 
-
-// const typeDefs = gql`
-//   type Query {
-//     hello: String
-//   }
-// `;
-
-// const resolvers = {
-//   Query: {
-//     hello: () => {
-//       return 'Hello world!';
-//     }
-//   },
-// };
 
 async function startApolloServer(typeDefs:any, resolvers:any | any[]) {
     const app = express();

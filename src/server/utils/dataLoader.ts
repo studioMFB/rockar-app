@@ -76,8 +76,8 @@ export namespace DataLoader {
     }
   }
 
-  // This is a stub for fetching data from your database.
-  // Replace this with your actual database query logic.
+  // This is a stub for fetching data from the database.
+  // To be implemented with the actual database query logic.
   async function getDataFromDatabase(query: any, params: any): Promise<string[][]>  {
     // This is a stub: a real function would interact with your database and return the query results
     // For example:

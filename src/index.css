@@ -1,3 +1,12 @@
+:root {
+  --title-color: blueviolet;
+  --link-color: #ffffff;
+  --item-color: rgb(107, 107, 107);
+  --main-bkg-color: rgb(48, 48, 48);
+  --header-bkg-color: rgb(40, 40, 40);
+
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,11 +14,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:blueviolet;
   background-color: rgb(40, 46, 48);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1{
+  color: var(--title-color);
 }
