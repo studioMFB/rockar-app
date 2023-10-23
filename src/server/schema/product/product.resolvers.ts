@@ -1,7 +1,8 @@
+import { DataLoader } from "../../utils/dataLoader";
 import { IProduct } from "./product.model";
 
 
 export const ProductResolvers = {
-  product: (_: any, args:IProduct) => {
-  },
+  products: DataLoader.fetchAll<IProduct>('product'),
+
 };

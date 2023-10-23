@@ -5,9 +5,9 @@ import { DataLoader } from "../../utils/dataLoader";
 
 export const DatasetResolvers = {
 
-    dataset: async (root: any, args: IDataset): Promise<string[][]> => {
+    dataset: async (root: any, args: IDataset): Promise<string[]> => {
         try {
-            const dataArray = await DataLoader.genericDataGetter(args.type);            
+            const dataArray = await DataLoader.fetchData<string>(args.type);            
             return dataArray;
         }
         catch (error) {

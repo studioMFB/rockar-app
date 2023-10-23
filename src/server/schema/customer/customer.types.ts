@@ -1,5 +1,5 @@
 import { gql } from "apollo-server-express";
-import { EmailAddress, PhoneNumber, PostalCode } from 'graphql-scalars/typings/typeDefs';
+import { EmailAddress, PostalCode } from 'graphql-scalars/typings/typeDefs';
 
 
 const CustomerTypes = gql`
@@ -8,7 +8,7 @@ const CustomerTypes = gql`
     email: EmailAddress
     forename: String!
     surname: String!
-    contactNumber: PhoneNumber
+    contactNumber: String
     postcode: PostalCode
   }
 
@@ -21,8 +21,8 @@ const CustomerTypes = gql`
   }
 
   type Query {
-    # customers: [Customer] 
-    customers(filter: CustomerFilterInput!): [Customer] 
+    customers: [Customer] 
+    customersFilter(filter: CustomerFilterInput!): [Customer] 
    }
 `;
 

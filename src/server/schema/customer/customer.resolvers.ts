@@ -16,46 +16,40 @@ const TYPE = "customer";
 // }
 
 const CustomerResolvers = {
-  // customers: async (): Promise<string[][]> => {
-  //   try {
-  //     const dataArray = await DataLoader.genericDataGetter(TYPE);
-  //     return dataArray;
-  //   }
-  //   catch (error) {
-  //     throw new Error(ERROR_MSG_DATA_FETCH);
-  //   }
-  // },
+  customers: DataLoader.fetchAll<ICustomer>('customer'),
+  
 
-  customers: async (parent: any, args: { filter: ICustomer }, context: any, info: any): Promise<string[][]> => {
+  customersFilter: async (parent: any, args: { filter: ICustomer }, context: any, info: any): Promise<string[]> => {
     try {
-      const dataArray = await DataLoader.genericDataGetter(TYPE);
+      const dataArray = await DataLoader.fetchData<string>(TYPE);
 
-      // Extracting filter input from arguments
-      const { filter } = args;
+      // // Extracting filter input from arguments
+      // const { filter } = args;
 
-      // Filter the results
-      const filteredCustomers = dataArray.filter((customer) => {
-        let matches = true;
+      // // Filter the results
+      // const filteredData = dataArray.filter((customer:ICustomer) => {
+      //   let matches = true;
 
-        for (const [key, value] of Object.entries(filter)) {
-          if (key in customer && customer[key as keyof typeof customer] !== value) {
-            matches = false;
-            break;
-          }
-        }
-        return matches;
-      });
+      //   for (const [key, value] of Object.entries(filter)) {
+      //     if (key in customer && customer[key as keyof typeof customer] !== value) {
+      //       matches = false;
+      //       break;
+      //     }
+      //   }
+      //   return matches;
+      // });
 
-      // Transform the data from snake_case to camelCase
-      // const mapArray = filteredCustomers.map((customer: any) => ({
-      //   email: customer.email,
-      //   forename: customer.forename,
-      //   surname: customer.surname,
-      //   contactNumber: customer.contact_number,
-      //   postcode: customer.postcode,
-      // }));
+      // // Transform the data from snake_case to camelCase
+      // // const mapArray = filteredCustomers.map((customer: any) => ({
+      // //   email: customer.email,
+      // //   forename: customer.forename,
+      // //   surname: customer.surname,
+      // //   contactNumber: customer.contact_number,
+      // //   postcode: customer.postcode,
+      // // }));
 
-      return filteredCustomers;
+      // // return filteredData;
+      return dataArray;
     }
     catch (error) {
       throw new Error(ERROR_MSG_DATA_FETCH);

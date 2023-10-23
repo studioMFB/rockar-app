@@ -10,9 +10,17 @@ export const ProductTypes = gql`
     model: String!
     price: Int!
   }
+  input ProductFilterInput {
+    vin: String
+    make: String
+    colour: String
+    model: String
+    price: Int
+  }
 
   type Query {
-    product(colour: String!): Product 
+    products: [Product] 
+    productsFilter(filter: ProductFilterInput!): [Product] 
    }
 `;
 
