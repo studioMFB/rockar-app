@@ -4,6 +4,7 @@ import { ERROR_MSG_WRONG } from "../../constants/error";
 import { IProduct } from "../../server/schema/product/product.model";
 import { useQuery } from '@apollo/client';
 import { PRODUCTS_QUERY } from "../../server/schema/product/product.queries";
+import ProductSearch from "../components/productSearch";
 
 
 function ProductsPage() {
@@ -13,7 +14,8 @@ function ProductsPage() {
   if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
 
   return (<div className="container">
-    {data.products.map((product: IProduct, index: number) => {
+    <ProductSearch />
+    {/* {data.products.map((product: IProduct, index: number) => {
       return <div className="item product">
         <p key={index}>{product.make}</p>
         <p key={index}>{product.model}</p>
@@ -21,7 +23,7 @@ function ProductsPage() {
         <p key={index}>{product.vin}</p>
         <p key={index}>{product.price}</p>
       </div>;
-    })}
+    })} */}
   </div>);
 }
 

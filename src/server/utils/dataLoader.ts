@@ -8,18 +8,6 @@ import {
 
 export namespace DataLoader {
 
-  // export async function getDataBasedOnFilter(type:string, filter:any){
-  //   const dataArray = await DataLoader.genericDataGetter(type, filter) as string;
-
-  //   // const data = dataArray.find((data) => data.forename.toLowerCase() == filter.toLowerCase());
-  //   let data = undefined;
-
-  //   if(!data){
-  //     throw new Error(ERROR_MSG_DATA);
-  //   }
-
-  //   return data;
-  // }
   function mapData(data: any[]): any[] {
     return data.map(item => {
       const result: { [key: string]: any } = {};
@@ -42,8 +30,15 @@ export namespace DataLoader {
         let matches = true;
 
         for (const [key, value] of Object.entries(filter)) {
-          if (key in data && data[key as keyof typeof data] !== value) {
-            matches = false;
+          console.log("key ", key);
+          console.log("value ", value.toLowerCase());
+          console.log("data[key as keyof typeof data]  ", data[key as keyof typeof data] );
+          // Check if key exists and if its value is not a match.
+          const dataValue = (data[key as keyof typeof data] as string).toLowerCase();
+          console.log("dataValue ", dataValue);
+
+          if (key in data && dataValue !== value.toLowerCase()) {
+              matches = false;
             break;
           }
         }
@@ -63,6 +58,7 @@ export namespace DataLoader {
       const params = {
         ...args, // arguments passed to the database query.
       };
+
       // Extracting filter input from arguments
       const { filter } = args;
 
@@ -110,7 +106,6 @@ export namespace DataLoader {
       const filePath = `${DIR_PATH}/${filename}.csv`;
       const jsonData: T[] = await csv().fromFile(filePath); // Parse CSV as Json.
 
-      // return JSON.stringify(jsonData);
       return jsonData;
     }
     catch {

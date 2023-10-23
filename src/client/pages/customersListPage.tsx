@@ -11,7 +11,7 @@ function CustomersListPage() {
     const { loading, error, data } = useQuery(CUSTOMERS_NAME_QUERY);
 
   if (loading) { return <p>Loading...</p>; }
-  if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
+  if (error) { return <p>{ERROR_MSG_WRONG}</p>;}
 
   return (<div className="container">
      {data.customers.map((customer: ICustomer, index:number) => {
