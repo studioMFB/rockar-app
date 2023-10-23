@@ -1,10 +1,10 @@
 import "./../styles/main.scss";
 import "./../styles/customer.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
-import { ICustomer } from "../../server/schema/customer/customer.model";
 import { useQuery } from '@apollo/client';
-import { CUSTOMERS_NAME_QUERY } from "../../server/schema/customer/customer.queries";
 import { Link } from "react-router-dom";
+import { ICustomer } from "../../server/schema/customer/customer.model";
+import { CUSTOMERS_NAME_QUERY } from "../../server/schema/customer/customer.queries";
 
 
 function CustomersListPage() {

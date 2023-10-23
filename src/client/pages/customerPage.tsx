@@ -16,27 +16,29 @@ interface CustomerPageParams {
 
 function CustomerPage() {
   const { forename, surname } = useParams<CustomerPageParams>();
-  
-      const { loading, error, data } = useQuery(CUSTOMERS_QUERY, {
-    variables: { filter: {
-      forename: forename,
-      surname: surname,
-    }, },
+
+  const { loading, error, data } = useQuery(CUSTOMERS_QUERY, {
+    variables: {
+      filter: {
+        forename: forename,
+        surname: surname,
+      },
+    },
   });
 
   if (loading) { return <p>Loading...</p>; }
   if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
 
   return (<div className="container">
-    {data.customers.map((customer: ICustomer, index:number) => {
+    {data.customers.map((customer: ICustomer, index: number) => {
       return <div className="item customer">
-          <p key={index}>{customer.forename}</p>
-          <p key={index}>{customer.surname} |</p>
-          <p key={index}>{customer.email} |</p>
-          <p key={index}>{customer.contactNumber} |</p>
-          <p key={index}>{customer.postcode}</p>
-          </div>;
-        })}
+        <p key={index}>{customer.forename}</p>
+        <p key={index}>{customer.surname} |</p>
+        <p key={index}>{customer.email} |</p>
+        <p key={index}>{customer.contactNumber} |</p>
+        <p key={index}>{customer.postcode}</p>
+      </div>;
+    })}
   </div>);
 }
 
