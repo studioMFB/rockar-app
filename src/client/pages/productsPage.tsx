@@ -1,29 +1,37 @@
 import "./../styles/main.scss";
 import "./../styles/customer.scss";
+import { ERROR_MSG_WRONG } from "../../constants/error";
 import { IProduct } from "../../server/schema/product/product.model";
 import { useQuery, gql } from '@apollo/client';
 
 
+const TYPE = "product";
+
 const PRODUCTS_QUERY = gql`
-  query getProducts {
-    getAllProducts{
-      vin
-      make
-      colour
-      model
-      price
+  query getDataset($type: String!){
+    dataset(type: $type) {
+      __typename
+      ... on Product {
+        vin
+        make
+        colour
+        model
+        price
+      }
     }
   }
 `;
 
 function ProductsPage() {
-  const { loading, error, data } = useQuery(PRODUCTS_QUERY);
+  const { loading, error, data } = useQuery(PRODUCTS_QUERY, {
+    variables: { type: TYPE },
+  });
 
   if (loading) { return <p>Loading...</p>; }
-  if (error) { return <p>Opps, something went wrong! :(</p>; }
+  if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
 
   return (<div className="container">
-    {data.getAllCustomers.map((product: IProduct, index: number) => {
+    {data.dataset.map((product: IProduct, index: number) => {
       return <div className="item products">
         <p key={index}>{product.make}</p>
         <p key={index}>{product.model}</p>

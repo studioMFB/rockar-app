@@ -1,13 +1,8 @@
 import csv from "csvtojson";
+import { ERROR_MSG_CONVERT, ERROR_MSG_DATA_SOURCE, 
+  ERROR_MSG_DB_CONNECT, ERROR_MSG_DIR_UNDEFINED, 
+  ERROR_MSG_FILE_UNDEFINED, ERROR_MSG_PARAMS } from "../../constants/error";
 
-
-const ERROR_MSG_DIR_UNDEFINED = "The directory path is undefined!";
-const ERROR_MSG_FILE_UNDEFINED = "The filename is undefined!";
-const ERROR_MSG_CONVERT = "Failed while trying to convert the csv into a json!";
-const ERROR_MSG_DB_CONNECT = "Failed to connect to the database!";
-const ERROR_MSG_DATA_SOURCE = "Invalid data source!";
-const ERROR_MSG_PARAMS = "The query parameters are undefined!";
-// const ERROR_MSG_DATA = "No data was found!";
 
 export namespace DataLoader {
 
@@ -24,20 +19,14 @@ export namespace DataLoader {
   //   return data;
   // }
 
-  export async function genericDataGetter(type: string, params?: Record<string, any>): Promise<string[][]>  {
-    console.log("genericDataGetter =>");
+  export async function genericDataGetter(type: string, params?: Record<string, any>): Promise<string[][]> {
+    const DATA_SOURCE: string | undefined = process.env.DATA_SOURCE?.toLowerCase();
 
-    const dataSource: string | undefined = process.env.DATA_SOURCE?.toLowerCase();
-    console.log("process.env.DATA_SOURCE ", dataSource);
-
-    switch (dataSource) {
+    switch (DATA_SOURCE) {
       case "csv":
-
-    console.log("=> CSV");
-
         return getDataFromCsv(type);
       case "database":
-        if(!params){
+        if (!params) {
           throw new Error(ERROR_MSG_PARAMS);
         }
         return getDataFromDatabase(type, params);
@@ -47,26 +36,17 @@ export namespace DataLoader {
   }
 
   async function getDataFromCsv(filename: string): Promise<string[][]> {
-    console.log("getDataFromCsv => ");
-
-    const dirPath: string | undefined = process.env.CSV_DIR_PATH;
-
-    console.log("process.env.CSV_DIR_PATH ", dirPath);
-    console.log("filename => ", filename);
-
+    const DIR_PATH: string | undefined = process.env.CSV_DIR_PATH;
     try {
-      if (!dirPath) {
+      if (!DIR_PATH) {
         throw new Error(ERROR_MSG_DIR_UNDEFINED);
       }
       if (!filename) {
         throw new Error(ERROR_MSG_FILE_UNDEFINED);
       }
-      // Parse CSV to return data as Json
-      const filePath = `${dirPath}/${filename}.csv`;
-      console.log("filePath ", filePath);
 
-      const jsonData = await csv().fromFile(filePath) as string[][];
-      console.log("jsonData ", jsonData);
+      const filePath = `${DIR_PATH}/${filename}.csv`;
+      const jsonData = await csv().fromFile(filePath) as string[][]; // Parse CSV as Json.
 
       // return JSON.stringify(jsonData);
       return jsonData;
@@ -78,7 +58,7 @@ export namespace DataLoader {
 
   // This is a stub for fetching data from the database.
   // To be implemented with the actual database query logic.
-  async function getDataFromDatabase(query: any, params: any): Promise<string[][]>  {
+  async function getDataFromDatabase(query: any, params: any): Promise<string[][]> {
     // This is a stub: a real function would interact with your database and return the query results
     // For example:
     // const data = await db.query(query, params);

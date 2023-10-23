@@ -13,8 +13,8 @@ const CustomerType = gql`
   }
 
   type Query {
-    getAllCustomers: [Customer] 
-    getCustomer(arg: String): Customer 
+    # customers: [Customer] 
+    customer(arg: String!): Customer 
    }
 `;
 

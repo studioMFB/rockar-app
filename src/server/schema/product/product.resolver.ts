@@ -2,10 +2,6 @@ import { IProduct } from "./product.model";
 
 
 export const ProductResolver = {
-  getAllProducts: () => {
-    
-  },
-
-  getProduct: (_: any, args:IProduct) => {
+  product: (_: any, args:IProduct) => {
   },
 };

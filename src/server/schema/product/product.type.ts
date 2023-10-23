@@ -12,8 +12,7 @@ export const ProductType = gql`
   }
 
   type Query {
-    getAllProducts: [Product] 
-    getProduct(colour: String!): Product 
+    product(colour: String!): Product 
    }
 `;
 
