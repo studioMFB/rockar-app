@@ -10,6 +10,7 @@ export const ERROR_MSG_FILE_UNDEFINED = "The filename is undefined!";
 export const ERROR_MSG_DATA_SOURCE = "Invalid data source!";
 export const ERROR_MSG_DATA_FOUND = "No data was found!";
 export const ERROR_MSG_DATA_FETCH = "Failed to fetch the data!";
+export const ERROR_MSG_FILTER = "Missing filters!";
 // CSV
 export const ERROR_MSG_CONVERT = "Failed while trying to convert the csv into a json!";
 // Database

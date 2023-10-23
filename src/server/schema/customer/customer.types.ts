@@ -8,7 +8,7 @@ const CustomerTypes = gql`
     email: EmailAddress
     forename: String!
     surname: String!
-    contactNumber: PhoneNumber
+    contactNumber: String
     postcode: PostalCode
   }
 
@@ -21,7 +21,6 @@ const CustomerTypes = gql`
   }
 
   type Query {
-    # customers: [Customer] 
     customers(filter: CustomerFilterInput!): [Customer] 
    }
 `;
