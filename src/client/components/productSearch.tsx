@@ -11,10 +11,8 @@ function ProductSearch() {
     const [colour, setColour] = useState('');
     const [price, setPrice] = useState('');
 
-    // useLazyQuery returns a function that you call to execute the query
     const [getProducts, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY);
 
-    // This function will be called when the user clicks the "Search" button
     const search = () => {
         let filter: any = {};
         if (make) filter.make = make;
@@ -25,7 +23,6 @@ function ProductSearch() {
         // Execute the query manually with the current filter
         getProducts({ variables: { filter } });
     };
-
 
     if (loading) { return <p>Loading...</p>; }
     if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
