@@ -2,9 +2,9 @@
 This project is a full-stack application built with Next.js, integrating Apollo Client and Apollo Server. It demonstrates how to set up a Next.js application to run both the client and the server-side of an application within the same codebase. The client-side uses Apollo Client to handle GraphQL queries and to interact with the Apollo Server.
 
 ## Features
-Next.js for the frontend and backend.
+React for the frontend.
 Apollo Client for data management on the client-side.
-Apollo Server for GraphQL server on the backend.
+Apollo Server Express for GraphQL server on the backend.
 Single codebase for frontend and backend.
 
 ## Prerequisites
@@ -17,13 +17,15 @@ Clone this repository
 ```bash
 git clone https://github.com/studioMFB/rockar-app
 ```
-Navigate to the repository directory
+Copy the .env.example file and rename it to .env, 
+then replace the placeholder data with your actual values.
 ```bash
-cd rockar
+cp .env.example .env
 ```
 Install the npm dependencies
 ```bash
-npm i npm install -g ts-node
+npm i -f
+npm i -g ts-node
 ```
 
 To run the application, follow these steps:
@@ -37,12 +39,15 @@ Start the app for production.
 npm run build
 npm run start
 ```
+Run tests.
+```bash
+npm test
+```
 
 Open http://localhost:3000 with your browser to see the frontend application.
 The GraphQL server can be accessed at http://localhost:4000/graphql. 
 You can use tools like GraphQL Playground or Postman to interact with the GraphQL server.
 
 ## Project Structure
-* pages/api/graphql.ts: This file contains the Apollo Server and handles GraphQL queries.
-* lib/apolloClient.ts: This file sets up the configuration for Apollo Client.
-* pages/index.ts: This is the main page component that uses Apollo Client to fetch data from the GraphQL server.
+* src/server/schema/: This folder contains the various models, types, resolvers and queries for each object.
+* src/client/pages/index.ts: This is the main page component that uses Apollo Client to fetch data from the GraphQL server.
