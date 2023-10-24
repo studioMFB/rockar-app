@@ -9,6 +9,7 @@ import HomePage from "./pages/homePage";
 import CustomerPage from "./pages/customerPage";
 
 
+
 function App() {
   return (
     <ApolloProvider client={client}>
