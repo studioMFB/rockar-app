@@ -1,4 +1,4 @@
-import "./styles/app.scss";
+import "./styles/App.scss";
 import { ApolloProvider } from '@apollo/client';
 import { client } from './apolloClient';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
