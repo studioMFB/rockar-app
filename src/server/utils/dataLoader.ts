@@ -242,6 +242,9 @@ export namespace DataLoader {
       }
 
       const filePath = `${DIR_PATH}/${filename}.csv`;
+
+      console.log("filePath ", filePath);
+
       const jsonData: T[] = await csv().fromFile(filePath); // Parse CSV as Json.
 
       return jsonData;
