@@ -31,12 +31,12 @@ function CustomerPage() {
 
   return (<div className="container">
     {data.customers.map((customer: ICustomer, index: number) => {
-      return <div className="item customer">
-        <p key={index}>{customer.forename}</p>
-        <p key={index}>{customer.surname} |</p>
-        <p key={index}>{customer.email} |</p>
-        <p key={index}>{customer.contactNumber} |</p>
-        <p key={index}>{customer.postcode}</p>
+      return <div key={index} className="item customer">
+        <p>{customer.forename}</p>
+        <p>{customer.surname} |</p>
+        <p>{customer.email} |</p>
+        <p>{customer.contactNumber} |</p>
+        <p>{customer.postcode}</p>
       </div>;
     })}
   </div>);

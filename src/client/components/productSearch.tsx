@@ -37,12 +37,12 @@ function ProductSearch() {
             {data && (
                 <div>
                     {data.products.map((product: IProduct, index: number) => {
-                        return <div className="item product">
-                            <p key={index}>{product.make}</p>
-                            <p key={index}>{product.model}</p>
-                            <p key={index}>{product.colour}</p>
-                            <p key={index}>{product.vin}</p>
-                            <p key={index}>{product.price}</p>
+                        return <div key={index} className="item product">
+                            <p>{product.make}</p>
+                            <p>{product.model}</p>
+                            <p>{product.colour}</p>
+                            <p>{product.vin}</p>
+                            <p>{product.price}</p>
                         </div>;
                     })}
                 </div>

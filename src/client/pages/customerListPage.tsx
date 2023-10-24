@@ -15,8 +15,8 @@ function CustomerListPage() {
 
   return (<div className="container">
      {data.customers.map((customer: ICustomer, index:number) => {
-      return <div className="item customer">
-         <div key={index}>
+      return <div key={index} className="item customer">
+         <div>
           <Link className="customer" to={`/customer/${customer.forename}/${customer.surname}`}>
              <p> {customer.forename} {customer.surname}</p>
           </Link>
