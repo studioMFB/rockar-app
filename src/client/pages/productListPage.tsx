@@ -5,7 +5,7 @@ import { PRODUCTS_QUERY } from "../../server/schema/product/product.queries";
 import ProductSearch from "../components/productSearch";
 
 
-function ProductsPage() {
+function ProductListPage() {
   const { loading, error, data } = useQuery(PRODUCTS_QUERY);
 
   if (loading) { return <p>Loading...</p>; }
@@ -16,4 +16,4 @@ function ProductsPage() {
   </div>);
 }
 
-export default ProductsPage;
+export default ProductListPage;

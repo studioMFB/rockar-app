@@ -1,40 +1,23 @@
 import { gql } from 'apollo-server-express';
-import { DatasetType, DatasetResolver } from './dataset/dataset.index';
 import { CustomerTypes, CustomerResolvers } from './customer/customer.index';
 import { ProductTypes, ProductResolvers } from './product/product.index';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { EmailAddressResolver, PhoneNumberResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
+import { EmailAddressResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
 
 
 const typeDefs = gql`
      type Query
-     ${DatasetType}
      ${CustomerTypes}
      ${ProductTypes}
 `;
 
 const resolvers = {
-    DatasetResult: {
-        __resolveType(obj:any, contextValue:any, info:any) {
-            // Only Customer has a surname field
-            if (obj.surname) {
-                return 'Customer';
-            }
-            // Only Product has a vin field
-            if (obj.vin) {
-                return 'Product';
-            }
-            return null; // GraphQLError is thrown
-        }
-    },
     Query: {
-        ...DatasetResolver,
         ...CustomerResolvers,
         ...ProductResolvers,
     },
     // Add the custom scalar resolvers here
     EmailAddress: EmailAddressResolver,
-    PhoneNumber: PhoneNumberResolver,
     PostalCode: PostalCodeResolver
 };
 

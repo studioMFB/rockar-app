@@ -7,7 +7,7 @@ import { ICustomer } from "../../server/schema/customer/customer.model";
 import { CUSTOMERS_NAME_QUERY } from "../../server/schema/customer/customer.queries";
 
 
-function CustomersListPage() {
+function CustomerListPage() {
     const { loading, error, data } = useQuery(CUSTOMERS_NAME_QUERY);
 
   if (loading) { return <p>Loading...</p>; }
@@ -26,4 +26,4 @@ function CustomersListPage() {
   </div>);
 }
 
-export default CustomersListPage;
+export default CustomerListPage;
