@@ -8,17 +8,11 @@ const Header = () => {
     <header className="header">
       <h1>Rockar</h1>
       <nav>
-        <ul className="nav-links">
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/products">Product</Link>
-          </li>
-          <li>
-            <Link to="/customers">Customers</Link>
-          </li>
-        </ul>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
+          <Link to="/products">Product</Link>
+          <Link to="/customers">Customers</Link>
+        </div>
       </nav>
     </header>
   );

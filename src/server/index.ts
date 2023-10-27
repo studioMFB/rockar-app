@@ -3,16 +3,17 @@ import http from "http";
 import express from "express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { ApolloServer } from 'apollo-server-express';
-import schema from "./gql/schema";
+// import schema from "./gql/schema";
+import Schema from './gql/schema';
 
 
-async function startApolloServer(schema:any) {
+async function startApolloServer() {
     const app = express();
 
     const httpServer = http.createServer(app);
 
     const server = new ApolloServer({
-        schema: schema,
+        schema: Schema.init(),
         // Tell Express to attach GraphQL functionality to the server.
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     }) as any;
@@ -27,7 +28,9 @@ async function startApolloServer(schema:any) {
     await new Promise((resolve:any) =>
         httpServer.listen({ port: port }, resolve)
     );
+
+    
 }
 
 // Run the server.
-startApolloServer(schema);
+startApolloServer();

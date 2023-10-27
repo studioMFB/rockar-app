@@ -72,7 +72,7 @@ export namespace DataLoader {
  *
  * @throws Will throw an error if the filtering process encounters an issue.
  */
-  async function filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
+  export async function filterData<T extends object>(filter: T, dataArray: T[]): Promise<T[]> {
     try {
       // Filter the data
       const filteredData = dataArray.filter((data: T) => {
@@ -144,6 +144,7 @@ export namespace DataLoader {
 
       try {
         const dataArray = await fetchData<T>(type.toLowerCase(), params);
+
         if (filter) {
           return await filterData<T>(filter, dataArray);
         }
@@ -192,7 +193,7 @@ export namespace DataLoader {
     switch (DATA_SOURCE) {
       case "csv":
         return getDataFromCsv<T>(type);
-      case "database":
+      case "db":
         if (!params) {
           throw new Error(ERROR_MSG_PARAMS);
         }

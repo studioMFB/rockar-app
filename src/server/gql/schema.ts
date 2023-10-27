@@ -1,33 +1,49 @@
 import { gql } from 'apollo-server-express';
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { EmailAddressResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
-import { DataLoader } from '../utils/dataLoader';
+import { EmailAddressResolver, PostalCodeResolver, typeDefs as scalarTypeDefs } from 'graphql-scalars';
 import { CustomerTypes } from './types/customer';
 import { ProductTypes } from './types/product';
-import { ICustomer } from '../objects/customer';
-import { IProduct } from '../objects/product';
+import { Customer, ICustomer, } from '../objects/customer';
+import { IProduct, Product } from '../objects/product';
+import { GraphQLSchema } from 'graphql/type/schema';
 
 
-const typeDefs = gql`
-     type Query
-     ${CustomerTypes}
-     ${ProductTypes}
-`;
+export default class Schema {
+    
+    static init(): GraphQLSchema{
+        const customer = new Customer();
+        const product = new Product();
 
-const resolvers = {
-    Query: {
-        customers: DataLoader.fetchAll<ICustomer>('customer'),
-        products: DataLoader.fetchAll<IProduct>('product'),
+        const typeDefs = gql`
+             type Query
+             ${CustomerTypes}
+             ${ProductTypes}
+        `;
+        
+        const resolvers = {
+            Query: {
+                customers: customer.retrieve<ICustomer>(),
+                products: product.retrieve<IProduct>(),
+        
+            },
+            // Add the custom scalar resolvers here
+            EmailAddress: EmailAddressResolver,
+            PostalCode: PostalCodeResolver
+        };
 
-    },
-    // Add the custom scalar resolvers here
-    EmailAddress: EmailAddressResolver,
-    PostalCode: PostalCodeResolver
-};
+        const schema = makeExecutableSchema({
+            typeDefs: [scalarTypeDefs, typeDefs], // Combine scalar type definitions with our own
+            resolvers: resolvers,
+        });
 
-const schema = makeExecutableSchema({
-    typeDefs: [scalarTypeDefs, typeDefs], // Combine scalar type definitions with our own
-    resolvers,
-  });
+        return schema;
+    }
 
-  export default schema;
+}
+
+// const schema = makeExecutableSchema({
+//     typeDefs: [scalarTypeDefs, typeDefs], // Combine scalar type definitions with our own
+//     resolvers,
+// });
+
+// export default schema;
