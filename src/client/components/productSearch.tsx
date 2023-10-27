@@ -29,11 +29,11 @@ function ProductSearch() {
 
     return (
         <div>
-            <input type="text" placeholder="Make" value={make} onChange={(e) => setMake(e.target.value)} />
-            <input type="text" placeholder="Model" value={model} onChange={(e) => setModel(e.target.value)} />
-            <input type="text" placeholder="Colour" value={colour} onChange={(e) => setColour(e.target.value)} />
+            <input className="product__search--imput" type="text" placeholder="Make" value={make} onChange={(e) => setMake(e.target.value)} />
+            <input className="product__search--imput" type="text" placeholder="Model" value={model} onChange={(e) => setModel(e.target.value)} />
+            <input className="product__search--imput" type="text" placeholder="Colour" value={colour} onChange={(e) => setColour(e.target.value)} />
 
-            <button onClick={search}>Search</button>
+            <button className="product__search--btn" onClick={search}>Search</button>
             {data && (
                 <div>
                     {data.products.map((product: IProduct, index: number) => {
