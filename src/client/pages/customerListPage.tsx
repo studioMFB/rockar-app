@@ -3,8 +3,8 @@ import "./../styles/customer.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
 import { useQuery } from '@apollo/client';
 import { Link } from "react-router-dom";
-import { ICustomer } from "../../server/schema/customer/customer.model";
-import { CUSTOMERS_NAME_QUERY } from "../../server/schema/customer/customer.queries";
+import { CUSTOMERS_NAME_QUERY } from "../../server/gql/queries/customer";
+import { ICustomer } from "../../server/objects/customer";
 
 
 function CustomerListPage() {

@@ -1,7 +1,7 @@
 import { screen, render, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import ProductListPage from './productListPage';
-import { PRODUCTS_QUERY } from '../../server/schema/product/product.queries';
+import { PRODUCTS_QUERY } from '../../server/gql/queries/product';
 
 const mocks = [
     {

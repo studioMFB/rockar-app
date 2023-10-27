@@ -2,9 +2,9 @@ import "./../styles/main.scss";
 import "./../styles/product.scss";
 import { useState } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { IProduct } from '../../server/schema/product/product.model';
-import { PRODUCTS_QUERY } from "../../server/schema/product/product.queries";
 import { ERROR_MSG_WRONG } from '../../constants/error';
+import { PRODUCTS_QUERY } from "../../server/gql/queries/product";
+import { IProduct } from "../../server/objects/product";
 
 
 function ProductSearch() {

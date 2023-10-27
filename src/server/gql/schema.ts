@@ -1,8 +1,11 @@
 import { gql } from 'apollo-server-express';
-import { CustomerTypes, CustomerResolvers } from './customer/customer.index';
-import { ProductTypes, ProductResolvers } from './product/product.index';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { EmailAddressResolver, PostalCodeResolver, typeDefs as scalarTypeDefs} from 'graphql-scalars';
+import { DataLoader } from '../utils/dataLoader';
+import { CustomerTypes } from './types/customer';
+import { ProductTypes } from './types/product';
+import { ICustomer } from '../objects/customer';
+import { IProduct } from '../objects/product';
 
 
 const typeDefs = gql`
@@ -13,8 +16,9 @@ const typeDefs = gql`
 
 const resolvers = {
     Query: {
-        ...CustomerResolvers,
-        ...ProductResolvers,
+        customers: DataLoader.fetchAll<ICustomer>('customer'),
+        products: DataLoader.fetchAll<IProduct>('product'),
+
     },
     // Add the custom scalar resolvers here
     EmailAddress: EmailAddressResolver,

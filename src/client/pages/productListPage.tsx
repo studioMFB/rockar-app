@@ -1,8 +1,8 @@
 import "./../styles/main.scss";
 import { ERROR_MSG_WRONG } from "../../constants/error";
 import { useQuery } from '@apollo/client';
-import { PRODUCTS_QUERY } from "../../server/schema/product/product.queries";
 import ProductSearch from "../components/productSearch";
+import { PRODUCTS_QUERY } from "../../server/gql/queries/product";
 
 
 function ProductListPage() {

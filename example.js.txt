@@ -1,0 +1,74 @@
+class Customer extends abstractObject {
+    type = 'customer'
+}
+
+class Product extends abstractObject {
+    type = 'product'
+}
+
+class abstractObject {
+    constructor() {
+        this.adaptor = new abstractDataAdaptor()
+    }
+
+    create(data) {
+        this.adaptor.write(this.type, data)
+    }
+
+    retrieve(identifer) {
+        this.adaptor.read(this.type, identifer)
+    }
+
+    update(identifer, data) {
+        this.adaptor.write(this.type, data, identifier)
+    }
+
+    delete(identifer) {
+        this.adaptor.write(this.type, {}, identifer)
+    }
+}
+
+class abstractDataAdaptor {
+    constructor() {
+        switch(process.env.DATASOURCE) {
+            case "db":
+                return new DatabaseAdaptor();
+                break;
+
+            case "csv":
+            default:
+                return new CsvAdaptor();
+                break;
+        }
+    }
+}
+
+class CsvAdaptor extends abstractDatasource {
+    read(filename, identifer) {
+        // Data Source Specific Code
+    }
+
+    write(filename, data, identifer = false) {
+        // Data Source Specific Code
+    }
+}
+
+class DbAdaptor extends abstractDataSource {
+    read(table, identifier) {
+        // Data Source Specific Code
+    }
+
+    write(table, data, identifer = false) {
+        // Data Source Specific Code
+    }
+}
+
+class abstractDataSource {
+    read() {
+        console.error('Adaptor must have a read method!')
+    }
+
+    write() {
+        console.error('Adaptor must have a write method!')
+    }
+}
