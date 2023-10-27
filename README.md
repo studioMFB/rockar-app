@@ -26,9 +26,7 @@ Install the npm dependencies
 'ts-node' is needed to run the server with TypeScript.
 'dotenv' is necessary to use .ENV var on the server side.
 ```bash
-npm i -f
-npm i -g ts-node
-npm i dotenv --force --save -dev
+npm i
 ```
 
 To run the application, follow these steps:
