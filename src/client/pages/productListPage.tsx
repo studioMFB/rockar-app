@@ -6,7 +6,7 @@ import { PRODUCTS_QUERY } from "../../server/gql/queries/product";
 
 
 function ProductListPage() {
-  const { loading, error, data } = useQuery(PRODUCTS_QUERY);
+  const { loading, error } = useQuery(PRODUCTS_QUERY);
 
   if (loading) { return <p>Loading...</p>; }
   if (error) { return <p>{ERROR_MSG_WRONG}</p>; }
